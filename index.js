@@ -15,6 +15,19 @@ module.exports = function (_opts) {
   // for the command queue
   var q = [], blocking = false;
 
+  q.push(['insert', {
+    views: {
+      by_idx: {
+        map: function (entity) {
+          emit(entity.doc.__idx, entity.doc.id);
+        }
+      }
+    }
+  }, '_design/' + name, function (err) {
+    if (err && err.error !== 'conflict') throw (err); // ignore error telling us the view already exists
+  }]);
+  onConnect();
+
   function continuable (skip, limit, reverse, cb) {
     (function next () {
       var options = {};
@@ -23,9 +36,9 @@ module.exports = function (_opts) {
       if (limit) {
         options.limit = limit;
       }
-      q.push(['list', options, function (err, response) {
+      q.push(['view', name, 'by_idx', options, function (err, response) {
         if (err) return cb(err);
-        var results = response.rows.map(function (row) { return row.id; });
+        var results = response.rows.map(function (row) { return row.value; });
         skip += results.length;
         cb(null, results, next);
       }]);
