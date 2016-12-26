@@ -19,12 +19,12 @@
   "author": "Dan MacTough <danmactough@gmail.com> (http://yabfog.com/)",
   "license": "BSD",
   "dependencies": {
-    "microtime": "^0.5.1",
+    "microtime": "^2.1.2",
     "modeler": "^0.4.7"
   },
   "devDependencies": {
-    "mocha": "^1.18.2",
-    "nano": "^5.7.1",
+    "mocha": "^3.2.0",
+    "nano": "^6.2.0",
     "idgen": "^2.0.2"
   }
 }
