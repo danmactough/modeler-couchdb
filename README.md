@@ -1,6 +1,8 @@
 modeler-couchdb
 ===============
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danmactough/modeler-couchdb.svg)](https://greenkeeper.io/)
+
 CouchDB-powered functional entity system
 
 - - -
